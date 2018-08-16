@@ -1,5 +1,6 @@
 package com.luv2code.hibernate.demo;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -7,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 import com.luv2code.hibernate.demo.entity.Instructor;
 import com.luv2code.hibernate.demo.entity.InstructorDetail;
 
-public class CreateDemo {
+public class GetInstructorDetailDemo {
 
 	public static void main(String[] args) {
 
@@ -21,23 +22,21 @@ public class CreateDemo {
 		// create session
 		Session session = factory.getCurrentSession();
 		
-		try {
-			// create the objects
-			Instructor tempInstructor = new Instructor("Chad", "Darby", "darby@gmail.com");
-			InstructorDetail tempInstructorDetail = new InstructorDetail("ChadToCode", "Love To Code");
-			// associate the objects
-			tempInstructor.setInstructorDetail(tempInstructorDetail);
+		try {			
 			
 			// start a transaction
 			session.beginTransaction();
+			int theId = 4;
+			InstructorDetail tempinstructorDetail = session.get(InstructorDetail.class, theId);
 			
-			System.out.println(tempInstructor);
-			System.out.println(tempInstructorDetail);
-			// save
-			session.save(tempInstructor);
+			System.out.println(tempinstructorDetail);
+			System.out.println(tempinstructorDetail.getInstructor());
 			
+			session.delete(tempinstructorDetail);
 			// commit transaction
 			session.getTransaction().commit();
+			
+			System.out.println("Done!");
 		}
 		finally {
 			factory.close();
