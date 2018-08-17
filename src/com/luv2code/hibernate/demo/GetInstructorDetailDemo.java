@@ -1,6 +1,5 @@
 package com.luv2code.hibernate.demo;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -26,19 +25,22 @@ public class GetInstructorDetailDemo {
 			
 			// start a transaction
 			session.beginTransaction();
-			int theId = 4;
+			
+			int theId = 5;
 			InstructorDetail tempinstructorDetail = session.get(InstructorDetail.class, theId);
 			
 			System.out.println(tempinstructorDetail);
 			System.out.println(tempinstructorDetail.getInstructor());
 			
-			session.delete(tempinstructorDetail);
 			// commit transaction
 			session.getTransaction().commit();
 			
 			System.out.println("Done!");
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 		finally {
+			session.close();
 			factory.close();
 		}
 	}

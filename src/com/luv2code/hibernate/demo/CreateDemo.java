@@ -28,11 +28,12 @@ public class CreateDemo {
 			// associate the objects
 			tempInstructor.setInstructorDetail(tempInstructorDetail);
 			
+			//tempInstructorDetail.setInstructor(tempInstructor);
 			// start a transaction
 			session.beginTransaction();
 			
 			System.out.println(tempInstructor);
-			System.out.println(tempInstructorDetail);
+			System.out.println(tempInstructorDetail.getInstructor());
 			// save
 			session.save(tempInstructor);
 			
